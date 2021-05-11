@@ -1,5 +1,5 @@
 numpy
-s3fs = <0.5.0
+s3fs=<0.5.0
 awscli
 canvasapi
 certifi
