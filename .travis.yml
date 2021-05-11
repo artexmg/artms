@@ -21,4 +21,4 @@ deploy:
     branch: master
   provider: script
   script:
-    pipenv run python -m serial_reader
+    git status --porcelaine

@@ -6,15 +6,33 @@
 Asynchronous Real-time Monitor System
 =================================================================
 
+A complete solution for real time mechanical ventilator data acquisition
+and monitoring.
+
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 0
+   :caption: Tool overview:
 
    introduction
+
    solution
+
    conclusions
 
-   something/index.rst
+.. toctree::
+   :maxdepth: 0
+   :caption: Tool design:
+
+   serial_reader_doc
+
+   uploader_doc
+
+   streaming_doc
+
+.. toctree::
+   :maxdepth: 0
+   :caption: Modules
 
    modules
 

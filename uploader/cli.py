@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""manages cli capabilities for uploader package
+
+Example:
+    $pipenv run python -m uploader --help
+
+"""
+
+
 import os, time
 import argparse
 import logging
@@ -8,7 +17,13 @@ from uploader import up_deamon
 
 def set_logger(args):
     """
-    Setting my logger and arguments
+    Setting logger with versity levels
+
+    Attributes:
+        args if args.verbosity = true then loging lever is set to debug
+
+    Returns:
+        logger
     """
     log_level = logging.INFO
     if args.verbosity: log_level = logging.DEBUG
@@ -39,10 +54,9 @@ def launch_deamon(args):
         ):
             up_deamon.worker(args=args)
 
-def get_args(args=None):
+def get_args(args=None) -> type(argparse.ArgumentParser()):
     """
-    Set CLI arguments
-    Mostly for Deamon Run
+    Get cli arguments that will be used to run the Deamon
     """
     # creates the log directory if doesn't exist
     local_path = os.path.abspath(".")
@@ -69,13 +83,17 @@ def get_args(args=None):
 
 def main(args=None):
     """
-    manages logic for uploader Deamon
+    Main logic to start Uploader Daemon. Use --help to review cli options
+    Args:
+        args: command line arguments -f|-v|-p|-l|-c|-d
+    Returns:
+        None
     """
     args = get_args(args=args)
 
     logger = set_logger(args)
 
-    logger.info('launcihg deamon')
+    logger.info('launching deamon')
 
     logger.info(args.logfile)
     logger.info(args.pidfile)
