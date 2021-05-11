@@ -1,8 +1,11 @@
-2021sp-final-project-artexmg
-============================
+artms
+=====
 
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 4
 
+   conftest
    serial_reader
+   test_launcher
+   test_pset
    uploader

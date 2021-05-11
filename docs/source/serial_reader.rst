@@ -1,6 +1,14 @@
 serial\_reader package
 ======================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   serial_reader.tests
+
 Submodules
 ----------
 
@@ -19,7 +27,6 @@ serial\_reader.read\_arduino module
    :members:
    :undoc-members:
    :show-inheritance:
-
 
 Module contents
 ---------------

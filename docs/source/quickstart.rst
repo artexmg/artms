@@ -79,4 +79,4 @@ These are the basic commands to start working with the system
 # b. verify index.html has the right websocket IP
 
 # c. restart SerialReader
-    *pipenv run python -m serial_reader -d*
+    *pipenv run python -m                                                                                                                                                                            serial_reader -d*
