@@ -1,4 +1,4 @@
-Solution
+Proposed Solution
 ======================
 
 The objective of the present project is to resolve the

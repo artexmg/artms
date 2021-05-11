@@ -18,13 +18,9 @@ and monitoring.
 
    solution
 
-   serial_reader_doc
+   implementation
 
-   uploader_doc
-
-   streaming_doc
-
-   conclusion
+   conclusions
 
 .. toctree::
    :maxdepth: 0

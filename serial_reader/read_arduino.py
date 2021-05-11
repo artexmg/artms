@@ -9,6 +9,7 @@ import matplotlib
 from typing import Dict, Any
 
 from environs import Env
+
 env = Env()
 env.read_env()
 
@@ -27,6 +28,7 @@ BATCH_TIME = datetime.now().strftime("%d%m%y-%H%M%S")
 
 local_output_path = os.path.abspath(os.environ["SENSOR_DATA"])
 
+
 class MegaSensor:
     """
     Provides serial reading services and real time data streaming
@@ -36,10 +38,10 @@ class MegaSensor:
     header = [
         "ID",
         "Timestamp",
-        "Pressure2 (cmH2O)", #2
-        "Pressure1 (cmH2O)", #3
-        "Flow1 (lpm)",       #4
-        "Temp (Celcius)",    #5
+        "Pressure2 (cmH2O)",  # 2
+        "Pressure1 (cmH2O)",  # 3
+        "Flow1 (lpm)",  # 4
+        "Temp (Celcius)",  # 5
     ]
 
     def __init__(self, header=header, baudrate=_BAUDRATE, serial_port=_SERIAL_PORT):
@@ -82,7 +84,7 @@ class MegaSensor:
             raise
         return 0
 
-    def make_batch_dir(self, batch_path:str) -> int:
+    def make_batch_dir(self, batch_path: str) -> int:
         """
         created the directory for current batch
         Args:
@@ -152,7 +154,7 @@ class MegaSensor:
             while True:
                 try:
                     if args.demo_mode:
-                        #only sends to websockets, no files are stored
+                        # only sends to websockets, no files are stored
                         self.websocket_loop(batch_id, ws, args)
                     else:
                         # writes data locally
@@ -236,12 +238,12 @@ class MegaSensor:
             for row_id in range(ROWS_PER_FILE):
 
                 # composing the output line
-                rownum = row_offset + row_id            
+                rownum = row_offset + row_id
 
                 dataline = self.read_data(rownum, ws, args)
 
                 self.websocket_send(dataline, ws, args)
-                
+
                 # writes to file every ROWS_PER_FILE rows
                 writer = csv.writer(csv_file, delimiter=_DELIMITER)
                 writer.writerow(dataline)
@@ -279,12 +281,13 @@ class MegaSensor:
         """
         sends data via websocket. It could be deactivated to run locally
         Args:
-                dataline:
-                args:
+            dataline:
+            args:
 
         """
 
-        if args.local: return 0 # No websocket connection
+        if args.local:
+            return 0  # No websocket connection
 
-        value = [float(dataline[2]),float(dataline[4])]
+        value = [float(dataline[2]), float(dataline[4])]
         ws.send(json.dumps({"value": value}))
