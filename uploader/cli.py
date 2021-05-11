@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-"""manages cli capabilities for uploader package
-
-Example:
-    $pipenv run python -m uploader --help
-
-"""
-
-
 import os, time
 import argparse
 import logging
@@ -22,10 +13,10 @@ def set_logger(args: Dict)->logging.getLogger:
     if args.verbosity = true then loging lever is set to debug
 
     Args:
-        args (Dict)
+        args (Dict): cli parameters
 
     Returns:
-        logger (logger.getLogger)
+        logger (logger.getLogger): logger object
     """
     log_level = logging.INFO
     if args.verbosity: log_level = logging.DEBUG
@@ -45,11 +36,7 @@ def launch_deamon(args: Dict)->None:
     if arg = -f then it is launched as a foreground process
 
     Args:
-        args (Dict)
-
-    Returns:
-        None
-
+        args (Dict): cli arguments
     """
 
     # if flag --foreground is set, then no deamon is triggered
@@ -69,10 +56,10 @@ def get_args(args: Dict = None) -> type(argparse.ArgumentParser()):
     Get cli arguments that will be used to run the Daemon
 
     Args:
-        args (argparse.ArgumentParser)
+        args (Dict): cli arguments
 
     Returns:
-        argparse.ArgumentParser
+        argparse.ArgumentParser: Dict structure with cli args
 
     """
     # creates the log directory if doesn't exist
@@ -103,9 +90,8 @@ def main(args: Dict = None)-> None:
     Main logic to start Uploader Daemon. Use --help to review cli options
 
     Args:
-        args: (argparse.ArgumentParser)
-    Returns:
-        None
+        args (Dict): cli arguments
+
     """
     args = get_args(args=args)
 

@@ -1,13 +1,15 @@
 Proposed Solution
 ======================
 
-The objective of the present project is to resolve the
-problem of streaming real-time data for displaying and analyzing,
+The objective of the present project is to provide a platform capable to
+process real-time data for displaying and analyzing,
 as well as the collection of the data points in a customized
 repository for offline analysis and discovery,
-all these in a repeatable and reliable process that can be
-tractable and provide metadata to link the results with the
+as well to provide metadata to link the results with the
 devices being tested.
+
+All these in a reliable process that can be
+tractable and repeatable.
 
 Architecture overview
 ------------------------
