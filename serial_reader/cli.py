@@ -10,6 +10,7 @@ def set_logger(args: Dict) -> logging.getLogger():
     """
     Setting logger with verbosity levels
     if args.verbosity = true then loging lever is set to debug
+
     Args:
         args
 
