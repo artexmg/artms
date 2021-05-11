@@ -18,17 +18,9 @@ and monitoring.
 
    solution
 
+   implementation
+
    conclusions
-
-.. toctree::
-   :maxdepth: 0
-   :caption: Tool design:
-
-   serial_reader_doc
-
-   uploader_doc
-
-   streaming_doc
 
 .. toctree::
    :maxdepth: 0
