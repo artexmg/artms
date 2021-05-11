@@ -20,6 +20,8 @@ and monitoring.
 
    implementation
 
+   quickstart
+
    conclusions
 
 .. toctree::
