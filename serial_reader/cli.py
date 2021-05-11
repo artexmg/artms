@@ -6,6 +6,11 @@ from typing import Dict
 # from read_arduino import MegaSensor
 from serial_reader.read_arduino import MegaSensor
 
+from environs import Env
+
+env = Env()
+env.read_env()
+
 def set_logger(args: Dict) -> logging.getLogger():
     """
     Setting logger with verbosity levels
