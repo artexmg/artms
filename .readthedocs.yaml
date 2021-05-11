@@ -17,7 +17,6 @@ formats:
 python:
    version: 3.7
    install: environs
-   path: .
    requirements: requirements.txt
 
 sphinx:

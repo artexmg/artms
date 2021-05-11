@@ -2,10 +2,10 @@ import argparse
 import logging
 import os
 from typing import Dict
-from environs import Env
-
-env = Env()
-env.read_env()
+# from environs import Env
+#
+# env = Env()
+# env.read_env()
 
 # from read_arduino import MegaSensor
 from serial_reader.read_arduino import MegaSensor
