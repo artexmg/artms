@@ -9,6 +9,11 @@ all these in a repeatable and reliable process that can be
 tractable and provide metadata to link the results with the
 devices being tested.
 
+Architecture overview
+------------------------
+This image represents a high level architecture
+
+.. image:: images/architecture.png
 
 Scope
 --------
@@ -28,10 +33,3 @@ The scope of the solution includes:
 - A report system to show the results of the test with physiological values: Average Respiration Rest, Tidal Flow, Inspiration/Expiration ratio, PIP, PEEP, etc.
 
 
-Architecture overview
-------------------------
-
-
-This image represents a high level architecture
-
-.. image:: images/architecture.png

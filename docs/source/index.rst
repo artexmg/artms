@@ -18,17 +18,13 @@ and monitoring.
 
    solution
 
-   conclusions
-
-.. toctree::
-   :maxdepth: 0
-   :caption: Tool design:
-
    serial_reader_doc
 
    uploader_doc
 
    streaming_doc
+
+   conclusion
 
 .. toctree::
    :maxdepth: 0
