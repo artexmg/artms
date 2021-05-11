@@ -1,14 +1,20 @@
 import argparse
 import logging
 import os
+from typing import Dict
 
 # from read_arduino import MegaSensor
 from serial_reader.read_arduino import MegaSensor
 
-
-def set_logger(args):
+def set_logger(args: Dict) -> logging.getLogger():
     """
-    Setting my logger and arguments
+    Setting logger with verbosity levels
+    if args.verbosity = true then loging lever is set to debug
+    Args:
+        args
+
+    Returns:
+        logger
     """
     log_level = logging.INFO
     if args.verbosity:
@@ -23,9 +29,17 @@ def set_logger(args):
 
     return logger
 
-def main(args=None):
+def main(args: Dict =None)-> None:
     """
-    Manages how the serial deamon should be launch (if so!)
+    Entry point for serial_reader package. Implements cli capabilities
+    check serial_reader -h to get possible options
+
+    Args:
+        args
+
+    Returns:
+        None
+
     """
     # created the log directory if doesn't exist
     local_path = os.path.abspath(".")

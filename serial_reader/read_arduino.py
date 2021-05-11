@@ -6,6 +6,7 @@ from datetime import datetime
 import tempfile
 import shutil
 import matplotlib
+from typing import Dict, Any
 
 from environs import Env
 env = Env()
@@ -43,12 +44,13 @@ class MegaSensor:
 
     def __init__(self, header=header, baudrate=_BAUDRATE, serial_port=_SERIAL_PORT):
         """
-        initializes the serial port
-        input:
-                header: list with csv header
-                baudrate:
-                serial_port:
-        output:
+        Initializes the serial port
+
+        Args:
+                header: (str) list with csv header
+                baudrate: (str)
+                serial_port: (str)
+        Returns:
                 serial connection object
         """
         matplotlib.use("tkAgg")
@@ -63,10 +65,14 @@ class MegaSensor:
     def confirm_path(self, tmp_path, final_path):
         """
         move temporary path to its final name
-        in an atomic write fashin
-        input:
-            tmp_path
-            final_path
+        in an atomic write fashion
+
+        Args:
+            tmp_path: str
+            final_path: str
+
+        Returns:
+            exit_code: int
         """
         logger = logging.getLogger(__name__)
         try:
@@ -76,11 +82,11 @@ class MegaSensor:
             raise
         return 0
 
-    def make_batch_dir(self, batch_path):
+    def make_batch_dir(self, batch_path:str) -> int:
         """
         created the directory for current batch
-        input:
-            batch_path
+        Args:
+            batch_path: str
         """
         logger = logging.getLogger(__name__)
         try:
@@ -95,6 +101,14 @@ class MegaSensor:
     def get_websocket(self, url, host="localhost", port=8000):
         """
         connects to Websocket
+
+        Args:
+            url:
+            host:
+            port:
+
+        Returns:
+            websocket
         """
         logger = logging.getLogger(__name__)
 
@@ -115,7 +129,7 @@ class MegaSensor:
         logger = logging.getLogger(__name__)
         return logger
 
-    def log_serial(self, file_name, args):
+    def log_serial(self, file_name: str, args: Dict):
         """
         reads serial port
         input:
@@ -157,7 +171,7 @@ class MegaSensor:
         once the batch is finished, the whole directory is
         copied to final destination
 
-        input:
+        ARgs:
             tmp: temporary directory
             file_name: base_name for each file within the directory
             batch_id: batch number, to be used to conform directory name
@@ -191,6 +205,9 @@ class MegaSensor:
         NOTE: we need this function to calculate
               the right rownum if not called
               from file write loop
+        Args:
+            rownum: int
+            args: Dict
         """
         # ToDo make this call async (coroutine)
 
@@ -233,11 +250,15 @@ class MegaSensor:
         """
         manages writing files in a batch fashion
         tries to send data to WebSocket (if open)
+
+        Args:
             cols: column header
             file_path: output_path
             row_offset: next batch row_id
             ws: websocket_client connection
             verbose: prints serial readings
+        Returns:
+            dataLine
 
         ToDo: convert this to a Context Manager (if possible)
         """
@@ -256,8 +277,11 @@ class MegaSensor:
 
     def websocket_send(self, dataline, ws, args):
         """
-        sends data via websocket
-        could be deactivated to run locally
+        sends data via websocket. It could be deactivated to run locally
+        Args:
+                dataline:
+                args:
+
         """
 
         if args.local: return 0 # No websocket connection
