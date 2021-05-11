@@ -12,18 +12,20 @@ import argparse
 import logging
 import daemon
 from daemon import pidfile
+from typing import Dict
 
 from uploader import up_deamon
 
-def set_logger(args):
+def set_logger(args: Dict)->logging.getLogger:
     """
-    Setting logger with versity levels
+    Setting logger with verbosity levels
+    if args.verbosity = true then loging lever is set to debug
 
-    Attributes:
-        args if args.verbosity = true then loging lever is set to debug
+    Args:
+        args (Dict)
 
     Returns:
-        logger
+        logger (logger.getLogger)
     """
     log_level = logging.INFO
     if args.verbosity: log_level = logging.DEBUG
@@ -37,9 +39,17 @@ def set_logger(args):
 
     return logger
 
-def launch_deamon(args):
+def launch_deamon(args: Dict)->None:
     """
-    starts deamon
+    Launch uploader daemon.
+    if arg = -f then it is launched as a foreground process
+
+    Args:
+        args (Dict)
+
+    Returns:
+        None
+
     """
 
     # if flag --foreground is set, then no deamon is triggered
@@ -54,9 +64,16 @@ def launch_deamon(args):
         ):
             up_deamon.worker(args=args)
 
-def get_args(args=None) -> type(argparse.ArgumentParser()):
+def get_args(args: Dict = None) -> type(argparse.ArgumentParser()):
     """
-    Get cli arguments that will be used to run the Deamon
+    Get cli arguments that will be used to run the Daemon
+
+    Args:
+        args (argparse.ArgumentParser)
+
+    Returns:
+        argparse.ArgumentParser
+
     """
     # creates the log directory if doesn't exist
     local_path = os.path.abspath(".")
@@ -81,11 +98,12 @@ def get_args(args=None) -> type(argparse.ArgumentParser()):
 
     return parser.parse_args(args=args)
 
-def main(args=None):
+def main(args: Dict = None)-> None:
     """
     Main logic to start Uploader Daemon. Use --help to review cli options
+
     Args:
-        args: command line arguments -f|-v|-p|-l|-c|-d
+        args: (argparse.ArgumentParser)
     Returns:
         None
     """
