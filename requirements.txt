@@ -1,0 +1,21 @@
+numpy
+awscli
+canvasapi
+certifi
+environs
+pandas
+openpyxl
+gitpython
+numpy
+matplotlib
+pyserial
+django
+npm
+channels
+fastparquet
+s3fs = <0.5.0
+python-daemon
+websocket-client
+websockets
+sphinx
+sphinx-rtd-theme

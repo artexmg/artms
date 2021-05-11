@@ -18,7 +18,6 @@ environs = "*"
 pandas = "*"
 openpyxl = "*"
 gitpython = "*"
-csci-utils = {editable = true, ref = "master", git = "ssh://git@github.com/csci-e-29/2021sp-csci-utils-artexmg.git"}
 numpy = "*"
 matplotlib = "*"
 pyserial = "*"
