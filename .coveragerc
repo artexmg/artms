@@ -1,0 +1,35 @@
+
+
+
+[paths]
+source =
+   2021sp-final-project-artexmg
+   */site-packages
+
+[run]
+branch = true
+source =
+    final_project
+    tests
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*
+    */tests.py
+    */test_*.py
+    */*_tests.py
+    */cli.py
+    */__init__.py
+    */__main__.py
+# Skip Mocking Canvas utilities (from https://github.com/ucfopen/canvasapi)
+    */tests/mock.py
+    */tests/util.py
+    */tests/settings.py
+    */test_submit_helper.py
+
+exclude_lines =
+    # Don't complain if non-runnable code isn't run:
+    if 0:
+    if __name__ == "__main__":

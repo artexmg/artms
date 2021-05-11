@@ -1,0 +1,39 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+numpy = "*"
+coverage = "*"
+requests-mock = "*"
+
+[packages]
+awscli = "*"
+canvasapi = "*"
+certifi = "*"
+environs = "*"
+pandas = "*"
+openpyxl = "*"
+gitpython = "*"
+csci-utils = {editable = true, ref = "master", git = "ssh://git@github.com/csci-e-29/2021sp-csci-utils-artexmg.git"}
+numpy = "*"
+matplotlib = "*"
+pyserial = "*"
+django = "*"
+npm = "*"
+channels = "*"
+redis = "*"
+channels-redis = "*"
+fastparquet = "*"
+s3fs = "<0.5.0"
+python-daemon = "*"
+websocket-client = "*"
+websockets = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
+
+[requires]
+python_version = "3.8"

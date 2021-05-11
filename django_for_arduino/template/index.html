@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Asynchronous Real Time Monitor (or Art M. for short)</title>
+
+        <!--        from bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+              rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+              crossorigin="anonymous">
+        <!--        from chartjs and nagix realtime plugin-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1"></script>
+        <script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.0.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0-beta.1"></script>
+    </head>
+
+<body>
+   <div style="max-width: 900px; max-height: 400px;">
+       <h1>Asynchronous Real Time Monitor (Art M)</h1>
+        <canvas id="myChart" width="900" height="400"></canvas>
+   </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-10 mx-auto mt-5"></div>
+
+
+        </div>
+    </div>
+</body>
+    <script>
+        // Connects to data from my Arduino, via WebSocket
+        // DON'T FORGET: Check current IP Address Before Demonstration!!!
+        // let socket =new WebSocket('ws://98.194.183.125:8000/ws/mega_sensor/');
+        let socket =new WebSocket('ws://localhost:8000/ws/mega_sensor/');
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var myChart={
+          type: 'line',
+          data: {
+            datasets: [{
+                label: 'Pressure (cmH2O)',
+                borderColor: 'rgb(54, 162, 235)',
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                cubicInterpolationMode: 'monotone',
+                pointRadius: 0,
+                data: [],
+            }, {
+                label: 'Airflow (lpm)',
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                cubicInterpolationMode: 'monotone',
+                pointRadius: 0,
+                data: [],
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                type: 'realtime', position:'bottom',
+                realtime: {
+                    // Callback to arduino data from websocket (how cool!)
+                    onRefresh: function(chart) {
+                        socket.onmessage = function (e) {
+                            var recData = JSON.parse(e.data);
+                            // currently only two values: pressure and flow
+                            pressure = recData.value[0]
+                            flow = recData.value[1]
+
+                            chart.data.datasets[0].data.push({
+                                x:Date.now(),
+                                y: pressure
+                            })
+                            chart.data.datasets[1].data.push({
+                                x:Date.now(),
+                                y: flow
+                            })
+                         }
+                    },
+                    duration: 15000, // data duration in milliseconds
+                    refresh: 10,     // callback in milliseconds
+                    delay: 100,      // delayn in milliseconds
+                    }
+                }
+              }
+            },
+            plugins: {
+                streaming: {
+                    frameRate: 30 // frame rate per second
+                }
+            }
+        }
+        window.MyLine = new Chart(ctx, myChart).Line(lineChartDat);
+    </script>
+
+</html>
