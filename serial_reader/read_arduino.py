@@ -31,8 +31,9 @@ local_output_path = os.path.abspath(os.environ["SENSOR_DATA"])
 
 class MegaSensor:
     """
-    Provides serial reading services and real time data streaming
+    This class provides serial reading services and real time data streaming
     using websockets (if available)
+
     """
 
     header = [
@@ -49,9 +50,10 @@ class MegaSensor:
         Initializes the serial port
 
         Args:
-                header: (str) list with csv header
-                baudrate: (str)
-                serial_port: (str)
+                header (str): list with csv header
+                baudrate (str): websocket speed
+                serial_port (int): websocket serial port
+
         Returns:
                 serial connection object
         """
@@ -70,11 +72,11 @@ class MegaSensor:
         in an atomic write fashion
 
         Args:
-            tmp_path: str
-            final_path: str
+            tmp_path (str): temporary path where files are orignally stored
+            final_path (str): final path where the files will be commited
 
         Returns:
-            exit_code: int
+            exit_code (int): 0 means everyting was OK
         """
         logger = logging.getLogger(__name__)
         try:
@@ -87,8 +89,9 @@ class MegaSensor:
     def make_batch_dir(self, batch_path: str) -> int:
         """
         created the directory for current batch
+
         Args:
-            batch_path: str
+            batch_path (str): directory for current batch
         """
         logger = logging.getLogger(__name__)
         try:
@@ -105,12 +108,12 @@ class MegaSensor:
         connects to Websocket
 
         Args:
-            url:
-            host:
-            port:
+            url (str): websocket url
+            host (str): websocket host name or ip
+            port (int): websocket port
 
         Returns:
-            websocket
+            websocket: websocket connection
         """
         logger = logging.getLogger(__name__)
 
@@ -134,9 +137,10 @@ class MegaSensor:
     def log_serial(self, file_name: str, args: Dict):
         """
         reads serial port
-        input:
+
+        Args:
             file_name:
-            verbose:
+            verbose: verbosity level
 
         # ToDo: convert this to a Context Manager (if possible)
         """
@@ -173,12 +177,12 @@ class MegaSensor:
         once the batch is finished, the whole directory is
         copied to final destination
 
-        ARgs:
-            tmp: temporary directory
-            file_name: base_name for each file within the directory
-            batch_id: batch number, to be used to conform directory name
-            ws: websocket connection (just a pass trhough)
-            args: cli args
+        Args:
+            tmp (str): temporary directory
+            file_name (str): base_name for each file within the directory
+            batch_id (int): batch number, to be used to conform directory name
+            ws (Any): websocket connection (just a pass trhough)
+            args (Dict): cli args
         """
         batch_name = f"batch-{BATCH_TIME}-{str(batch_id)}"
         batch_path = os.path.join(tmp, batch_name)
@@ -208,10 +212,12 @@ class MegaSensor:
               the right rownum if not called
               from file write loop
         Args:
-            rownum: int
-            args: Dict
+            rownum (int): current row number for batch files (carry over)
+            args (Dict): cli arguments as a dictionary
+
+        ToDo make this call async (coroutine)
         """
-        # ToDo make this call async (coroutine)
+
 
         dataline = self.read_data(rownum, ws, args)
         self.websocket_send(dataline, ws, args)
@@ -220,11 +226,13 @@ class MegaSensor:
         """
         manages writing files in a batch fashion
         tries to send data to WebSocket (if open)
-            cols: column header
-            file_path: output_path
-            row_offset: next batch row_id
-            ws: websocket_client connection
-            verbose: prints serial readings
+
+        Args:
+            cols (str): column header
+            file_path (str): output_path
+            row_offset (int): next batch row_id
+            ws (Any): websocket_client connection
+            verbose (str): prints serial readings
 
         ToDo: convert this to a Context Manager (if possible)
         """
@@ -254,13 +262,13 @@ class MegaSensor:
         tries to send data to WebSocket (if open)
 
         Args:
-            cols: column header
-            file_path: output_path
-            row_offset: next batch row_id
-            ws: websocket_client connection
-            verbose: prints serial readings
+            cols (str): column header
+            file_path (str): output_path
+            row_offset (int): next batch row_id
+            ws (ws connection) : websocket_client connection
+            verbose (str): prints serial readings
         Returns:
-            dataLine
+            dataLine  (str)
 
         ToDo: convert this to a Context Manager (if possible)
         """
@@ -280,9 +288,10 @@ class MegaSensor:
     def websocket_send(self, dataline, ws, args):
         """
         sends data via websocket. It could be deactivated to run locally
+
         Args:
-            dataline:
-            args:
+            dataline (str): header for csv file
+            args (Dict): cli arguments
 
         """
 
