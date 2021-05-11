@@ -2,7 +2,7 @@ import os, sys
 from environs import Env
 from csci_utils.hashings import hash_helper
 import json
-import websocket_client
+import websocket
 import random, time
 import read_arduino
 
