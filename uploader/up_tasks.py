@@ -17,8 +17,9 @@ env.read_env()
 # hash_id = get_user_id(os.environ['HASH_ID'])
 hash_id=""
 # _S3_BUCKET = os.environ["S3_BUCKET"].format(hash_id=hash_id)
-_S3_BUCKET = os.environ["S3_BUCKET"]
+# _S3_BUCKET = os.environ["S3_BUCKET"]
 # _S3_BUCKET = os.getenv("S3_BUCKET")
+_S3_BUCKET='my_bucket'
 
 # _INPUT_PATH=os.path.abspath(os.environ['SENSOR_DATA'])
 # _INPUT_PATH=os.path.abspath(os.getenv('SENSOR_DATA'))
