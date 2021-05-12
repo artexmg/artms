@@ -65,4 +65,5 @@ autodoc_mock_imports = ["numpy",
                         "luigi",
                         "csci_utils",
                         "serial_reader",
-                        "environs"]
+                        "environs",
+                        "daemon"]
