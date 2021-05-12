@@ -68,4 +68,7 @@ autodoc_mock_imports = ["numpy",
                         "environs",
                         "daemon",
                         "os",
-                        "os.environ"]
+                        "os.environ",
+                        "os.getenv",
+                        "os.path",
+                        "os.path.join"]
