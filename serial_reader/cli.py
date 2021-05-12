@@ -4,7 +4,7 @@ import os
 from typing import Dict
 
 # from read_arduino import MegaSensor
-from serial_reader.read_arduino import MegaSensor
+from .read_arduino import MegaSensor
 
 def set_logger(args: Dict) -> logging.getLogger():
     """

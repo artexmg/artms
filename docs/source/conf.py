@@ -55,4 +55,13 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-autodoc_mock_imports = ["numpy", "dotenv", "dask", "pandas", "numpy", "boto3", "pytest","luigi","csci_utils"]
+autodoc_mock_imports = ["numpy",
+                        "dotenv",
+                        "dask",
+                        "pandas",
+                        "numpy",
+                        "boto3",
+                        "pytest",
+                        "luigi",
+                        "csci_utils",
+                        "serial_reader"]
