@@ -5,20 +5,26 @@ import luigi
 from luigi import Task, Parameter, ExternalTask
 from typing import Dict, Any
 
-from csci_utils.luigi.task import TargetOutput, Requires, Requirement
-from csci_utils.luigi.dask.target import ParquetTarget, CSVTarget
-from csci_utils.hashings.hash_helper import get_user_id
+from .task import TargetOutput, Requires, Requirement
+from .target import ParquetTarget, CSVTarget
+
+# from csci_utils.hashings.hash_helper import get_user_id
 
 from environs import Env
 env = Env()
 env.read_env()
 
-hash_id = get_user_id(os.environ['HASH_ID'])
-_S3_BUCKET = os.environ["S3_BUCKET"].format(hash_id=hash_id)
+# hash_id = get_user_id(os.environ['HASH_ID'])
+hash_id=""
+# _S3_BUCKET = os.environ["S3_BUCKET"].format(hash_id=hash_id)
+# _S3_BUCKET = os.environ["S3_BUCKET"]
+# _S3_BUCKET = os.getenv("S3_BUCKET")
+_S3_BUCKET='my_bucket'
 
-_INPUT_PATH=os.path.abspath(os.environ['SENSOR_DATA'])
+# _INPUT_PATH=os.path.abspath(os.environ['SENSOR_DATA'])
+# _INPUT_PATH=os.path.abspath(os.getenv('SENSOR_DATA'))
 _INPUT_PATH="./sensor_data"
-input_path = os.path.abspath(os.environ['SENSOR_DATA'])
+input_path = _INPUT_PATH
 
 
 
@@ -96,6 +102,7 @@ def push_files(input_path: str, batch_id: str, args: Dict) -> Any:
 if __name__ == "__main__":
     batch_id = 'sensor_data-batch-3'
     local_path = os.path.abspath(os.environ['SENSOR_DATA'])
+    # local_path = os.path.abspath(os.getenv('SENSOR_DATA'))
     input_path = os.path.join(local_path,batch_id)
 
     push_files(input_path=input_path,batch_id=batch_id)

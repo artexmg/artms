@@ -18,15 +18,21 @@ ROWS_PER_FILE = 400  # number of rows in each data file
 BATCH_SIZE = 5  # number of files in one single batch
 
 # Check serial port and Baudrate in Arduino IDE
-_BAUDRATE = os.environ["BAUD_RATE"]
-_SERIAL_PORT = os.environ["SERIAL_PORT"]
-_WS_URL = os.environ["WEBSOCKET"]
+# _BAUDRATE = os.environ["BAUD_RATE"]
+# _SERIAL_PORT = os.environ["SERIAL_PORT"]
+# _WS_URL = os.environ["WEBSOCKET"]
+_BAUDRATE = os.getenv("BAUD_RATE")
+_SERIAL_PORT = os.getenv("SERIAL_PORT")
+_WS_URL = os.getenv("WEBSOCKET")
+
 
 _DELIMITER = ","
 
 BATCH_TIME = datetime.now().strftime("%d%m%y-%H%M%S")
 
-local_output_path = os.path.abspath(os.environ["SENSOR_DATA"])
+# local_output_path = os.path.abspath(os.environ["SENSOR_DATA"])
+local_output_path = os.path.abspath(os.getenv("SENSOR_DATA"))
+
 
 
 class MegaSensor:

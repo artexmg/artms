@@ -1,6 +1,6 @@
 import os, time
 import logging
-from uploader import up_tasks
+from . import up_tasks
 from typing import Dict, Any
 
 from environs import Env
@@ -128,7 +128,8 @@ def worker(args: Dict) -> None:
         args (Dict): cli arguments
     """
     # starts sleepy so I can look for temp files
-    sleep_time = int(os.environ["DAEMON_CYCLE"])
+    # sleep_time = int(os.environ["DAEMON_CYCLE"])
+    sleep_time = int(os.getenv("DAEMON_CYCLE"))
     logger = set_deamon_logger(args)
 
     while True:
