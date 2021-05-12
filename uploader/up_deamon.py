@@ -128,7 +128,8 @@ def worker(args: Dict) -> None:
         args (Dict): cli arguments
     """
     # starts sleepy so I can look for temp files
-    sleep_time = int(os.environ["DAEMON_CYCLE"])
+    # sleep_time = int(os.environ["DAEMON_CYCLE"])
+    sleep_time = int(os.getenv("DAEMON_CYCLE"))
     logger = set_deamon_logger(args)
 
     while True:

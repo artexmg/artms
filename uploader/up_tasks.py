@@ -16,11 +16,13 @@ env.read_env()
 
 # hash_id = get_user_id(os.environ['HASH_ID'])
 hash_id=""
-_S3_BUCKET = os.environ["S3_BUCKET"].format(hash_id=hash_id)
+# _S3_BUCKET = os.environ["S3_BUCKET"].format(hash_id=hash_id)
+_S3_BUCKET = os.getenv("S3_BUCKET").format(hash_id=hash_id)
 
-_INPUT_PATH=os.path.abspath(os.environ['SENSOR_DATA'])
+
+_INPUT_PATH=os.path.abspath(os.getenv('SENSOR_DATA'))
 _INPUT_PATH="./sensor_data"
-input_path = os.path.abspath(os.environ['SENSOR_DATA'])
+input_path = os.path.abspath(os.getenv('SENSOR_DATA'))
 
 
 
@@ -97,7 +99,8 @@ def push_files(input_path: str, batch_id: str, args: Dict) -> Any:
 
 if __name__ == "__main__":
     batch_id = 'sensor_data-batch-3'
-    local_path = os.path.abspath(os.environ['SENSOR_DATA'])
+    # local_path = os.path.abspath(os.environ['SENSOR_DATA'])
+    local_path = os.path.abspath(os.getenv('SENSOR_DATA'))
     input_path = os.path.join(local_path,batch_id)
 
     push_files(input_path=input_path,batch_id=batch_id)

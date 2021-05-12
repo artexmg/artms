@@ -71,9 +71,13 @@ def get_args(args: Dict = None) -> type(argparse.ArgumentParser()):
     # creates the log directory if doesn't exist
     local_path = os.path.abspath(".")
 
-    daemon_path = os.path.join(local_path, os.environ['DAEMON_DIR'])
-    data_path = os.path.join(local_path, os.environ['SENSOR_DATA'])
-    log_path = os.path.join(daemon_path, os.environ["LOG_DIR"])
+    # daemon_path = os.path.join(local_path, os.environ['DAEMON_DIR'])
+    # data_path = os.path.join(local_path, os.environ['SENSOR_DATA'])
+    # log_path = os.path.join(daemon_path, os.environ["LOG_DIR"])
+    daemon_path = os.path.join(local_path, os.getenv('DAEMON_DIR'))
+    data_path = os.path.join(local_path, os.getenv('SENSOR_DATA'))
+    log_path = os.path.join(daemon_path, os.getenv("LOG_DIR"))
+
 
     default_pidfile = os.path.join(log_path, 'uploader_deamon.pid')
     default_logfile = os.path.join(log_path, 'uploader_deamon.log')
