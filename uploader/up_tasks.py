@@ -5,15 +5,17 @@ import luigi
 from luigi import Task, Parameter, ExternalTask
 from typing import Dict, Any
 
-from csci_utils.luigi.task import TargetOutput, Requires, Requirement
-from csci_utils.luigi.dask.target import ParquetTarget, CSVTarget
-from csci_utils.hashings.hash_helper import get_user_id
+from task import TargetOutput, Requires, Requirement
+from target import ParquetTarget, CSVTarget
+
+# from csci_utils.hashings.hash_helper import get_user_id
 
 from environs import Env
 env = Env()
 env.read_env()
 
-hash_id = get_user_id(os.environ['HASH_ID'])
+# hash_id = get_user_id(os.environ['HASH_ID'])
+hash_id=""
 _S3_BUCKET = os.environ["S3_BUCKET"].format(hash_id=hash_id)
 
 _INPUT_PATH=os.path.abspath(os.environ['SENSOR_DATA'])
