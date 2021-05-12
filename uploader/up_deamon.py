@@ -1,6 +1,6 @@
 import os, time
 import logging
-from uploader import up_tasks
+from . import up_tasks
 from typing import Dict, Any
 #
 # from environs import Env

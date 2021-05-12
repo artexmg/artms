@@ -5,8 +5,8 @@ import luigi
 from luigi import Task, Parameter, ExternalTask
 from typing import Dict, Any
 
-from task import TargetOutput, Requires, Requirement
-from target import ParquetTarget, CSVTarget
+from .task import TargetOutput, Requires, Requirement
+from .target import ParquetTarget, CSVTarget
 
 # from csci_utils.hashings.hash_helper import get_user_id
 
