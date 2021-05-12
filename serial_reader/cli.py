@@ -44,8 +44,8 @@ def main(args: Dict =None)-> None:
     """
     # created the log directory if doesn't exist
     local_path = os.path.abspath(".")
-    # log_path = os.path.join(local_path, os.environ["LOG_DIR"])
-    log_path = os.path.join(local_path, os.getenv("LOG_DIR"))
+    log_path = os.path.join(local_path, os.environ["LOG_DIR"])
+    # log_path = os.path.join(local_path, os.getenv("LOG_DIR"))
 
     
     logfile=os.path.join(log_path, "serial_reader_deamon.log")
