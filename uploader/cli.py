@@ -7,6 +7,12 @@ from typing import Dict
 
 from . import up_deamon
 
+
+from environs import Env
+
+env = Env()
+env.read_env()
+
 def set_logger(args: Dict)->logging.getLogger:
     """
     Setting logger with verbosity levels
