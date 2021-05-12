@@ -2,11 +2,11 @@ import os, time
 import logging
 from uploader import up_tasks
 from typing import Dict, Any
-
-from environs import Env
-
-env = Env()
-env.read_env()
+#
+# from environs import Env
+#
+# env = Env()
+# env.read_env()
 
 _base_dir = os.path.dirname(os.path.abspath(__file__))
 _deamon_path = os.path.join(_base_dir, "up_deamon")

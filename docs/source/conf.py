@@ -64,4 +64,5 @@ autodoc_mock_imports = ["numpy",
                         "pytest",
                         "luigi",
                         "csci_utils",
-                        "serial_reader"]
+                        "serial_reader",
+                        "environs"]

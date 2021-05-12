@@ -1,9 +1,4 @@
 import os, sys
-from environs import Env
-from csci_utils.hashings import hash_helper
-import json
-import websocket
-import random, time
 import read_arduino
 
 
@@ -14,10 +9,7 @@ def iam_alive() -> str:
     can  be tested with pytest
     """
     # use of hashings
-    print(f"hash(gorlins) = {hash_helper.get_user_id('gorlins')}")
-    print(f"hash(artexmg) = {hash_helper.get_user_id('artexmg')}")
 
-    return "IAMALIVE"
 
 def routine():
     my_sensor = read_arduino.MegaSensor()

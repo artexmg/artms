@@ -5,7 +5,7 @@ import daemon
 from daemon import pidfile
 from typing import Dict
 
-from uploader import up_deamon
+import up_deamon
 
 def set_logger(args: Dict)->logging.getLogger:
     """
