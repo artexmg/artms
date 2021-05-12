@@ -1,106 +1,103 @@
-# Final Project
+Asynchronous Real-time Monitor System
+======================================
 
-Add any badges to your ***published documentation*** up here!
+An (in)complete solution for real-time data acquisition and monitoring.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+------------
+[![Documentation Status](https://readthedocs.org/projects/artms/badge/?version=latest)](https://artms.readthedocs.io/en/latest/?badge=latest)
 
-- [Documenting your project](#documenting-your-project)
-  - [Set up](#set-up)
-  - [The writeup](#the-writeup)
-    - [Requirements](#requirements)
-  - [Build and publish](#build-and-publish)
-    - [Read the Docs](#read-the-docs)
-    - [GithubPages](#githubpages)
-    - [Your own host](#your-own-host)
-    - [Private options](#private-options)
+Don't foreget to [read the docs](https://artms.readthedocs.io/en/latest/index.html)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+If you want to get a better idea of what this system is capable to do, please, watch the [live demo video](https://www.youtube.com/watch?v=XweiEuXdC8U&list=LLjaSVA-XuwBzd-5brcOsdNQ)
 
-## Documenting your project
 
-The main deliverable for your final project is the ***documentation*** you
-provide here, in this repo, and where it is build.
+----
 
-We will be using [Sphinx](https://www.sphinx-doc.org/) to build static
-documentation for your project, including any overview writeup, etc.
+Creating the environment:
+-----------
 
-### Set up
+After cloning this repository locally, you would need to do some basic installation. 
 
-Sphinx is trivial to set up.  You can use a cookiecutter template that includes
-Sphinx, eg [cookiecutter-pypackage](https://github.com/audreyfeldroy/cookiecutter-pypackage), or just follow the [quickstart](https://www.sphinx-doc.org/en/master/usage/quickstart.html).
+My prefered way to isolate it is using pipenv wrapped over conda. First create a new conda environment, switch into it and install pipenv within
 
-### The writeup
+    conda create -n artsm python=3.8
 
-Whether or not you actually add your main project code to this repository is up
-to you.  Because we cannot assume you can deliver your code entirely to us (and
-it would be hard for us to evaluate, anyways), you should treat the deliverable
-here more like a paper than a code submission.
+    conda activate artsm
 
-Please 'document' your project using Sphinx, a static site generator, to build
-an HTML page that describes your project.
+    conda install pipenv
 
-#### Requirements
+Then install your dependencies in this new virtual environment  
 
-Requirements are loose due to project flexibility, but as a guideline you should
-include:
+    pipenv install --dev
 
-* An intro page to the problem
+You will need to setup the environment variables to your system and you will be ready to start.
 
-* An overview of your solution
 
-* Ideally some diagram of the architecture
+Quick start guide
+-----------------
+----------------
 
-* Tangible snippets of python code in your discussion
+These are the basic commands to start working with the system
 
-* Some amount of [sphinx
-autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html),
-either from your 'real' code, or from toy snippets you include to describe
-your approach, and some other sphinx cross references.
+Serial Reader
 
-* A conclusion of the main learnings or contributions of your project
+    pipenv run python -m serial_reader --help
 
-* Your Science Fair presentation should be similar to the content in the
-writeup, but the writeup is your chance to go deeper into the topics and
-really explain/demonstrate etc in more depth.
+First time execute it with no verbosity to see temporary directory
 
-### Build and publish
-It is easy to build sphinx documentation locally, but that is not good enough
-for sharing.  You need to find a way to share your write up with us!  You have
-a few options.
+    pipenv run python -m serial_reader -l
 
-The biggest decision is whether you want your documentation and/or this repo
-to be publicly viewable.
+open temporal file directory and then final directory
 
-Note: you still need to 'submit' your assignment via CI/CD, just to ensure we
-have the correct commit/tag of your repo, even if RTD/Github is doing most of
-the build.  However, there is no explicit need for testing.
+    open INFO:serial_reader.read_arduino:temp directory: /var/folders/h5/jh7gfnvs3gb6j6dvltzq15dr0000gn/T/tmphcfp4j6m
 
-#### Read the Docs
+you can verify how the files are moving around and then move to next module
 
-It is very easy to publish sphinx docs on [Read the
-Docs](https://readthedocs.org/)! The only caveat is that it requires your repo
-to be public (that's fine from the teaching staff's point of view) and your docs
-will be public too.  Go ahead and sign up, hook up your repo, and you are good
-to go!
+This is good time to trigger the uploader daemon
 
-#### GithubPages
 
-Github also can publish a webpage for you, based on sphinx in your repo.  The
-Pages will be publicly viewable, but your repo can remain private.  Here is
-[one example
-walkthrough](https://www.docslikecode.com/articles/github-pages-python-sphinx/).
+First verify aws has no files
+  
+      aws s3 ls s3://My_Bucket/sensor_data/
 
-#### Your own host
+Then run uploader module
+  
+      pipenv run python -m uploader --help
 
-Feel free to find another way to publish your docs!  We just require that it use
-Sphinx and is automatically built from your master branch using CI/CD.
+      pipenv run python -m uploader -v
 
-#### Private options
+Look for daemon PID file
 
-If you are not comfortable publishing your documentation publicly, you can still
-build your sphinx project in CI/CD, zip up the build artifact, and upload that
-to Canvas.  Your submission in this case will be the zipped html rather than the
-link to this repo; ensure you still have the repo link in the submission
-comments.
+    cat daemon_context/logs/uploader_deamon.pid
+
+    ps processID
+
+Look daemon log to see what tasks have been executed
+
+    more -f daemon_context/logs/uploader_deamon.log
+
+verify aws has files and kill deamon
+
+    aws s3 ls s3://<My_bucket>/sensor_data/
+
+    kill -9 processID
+
+go to shell screen and stop serial reader. This is a good time 
+to delete sensor datafiles
+
+streaming and visualization
+    
+    
+start django (websocket will be listening now)
+    
+    pipenv run python django_for_arduino/manage.py runserver*
+    
+start serial reader mode -d (no files, just streaming)
+    
+    pipenv run python -m serial_reader -d
+    
+verify streaminng!!
+    
+    pipenv run python -m websockets ws://localhost:8000/ws/mega_sensor/
+
+
